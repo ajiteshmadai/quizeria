@@ -13,15 +13,29 @@
 	<section ng-controller="QuestionController as questCtrl">
 		<div>{{questCtrl.currentQuestion.question}}</div>
 
-		<div>
+		<div ng-show="questCtrl.currentQuestion.answers.length">
 			<ol>
-				<li ng-repeat="ans in questCtrl.currentQuestion.answers"><input
-					type="radio" name="questCtrl.currentQuestion.selectedAnswer" value="{{ans}}">
-					<label>{{ans}}</label></li>
+				<li ng-hide="questCtrl.currentQuestion.isMutliChoice"
+					ng-repeat="ans in questCtrl.currentQuestion.answers"><input
+					type="radio" name="questCtrl.currentQuestion.selectedAnswer"
+					value="{{ans}}"> <label>{{ans}}</label></li>
+
+				<li ng-show="questCtrl.currentQuestion.isMutliChoice"
+					ng-repeat="ans in questCtrl.currentQuestion.answers"><input
+					type="checkbox" name="questCtrl.currentQuestion.selectedAnswer"
+					value="{{ans}}"> <label>{{ans}}</label></li>
 
 			</ol>
+
+
 		</div>
-		
+
+		<div ng-hide="questCtrl.currentQuestion.answers.length">
+			<label>Your Answer : </label>
+			<textarea> </textarea>
+		</div>
+
+
 		<button type="button" ng-click="questCtrl.getNextQuestion()">Next</button>
 	</section>
 	<footer></footer>
