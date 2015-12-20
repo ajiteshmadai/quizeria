@@ -11,19 +11,20 @@
 
 	<nav></nav>
 	<section ng-controller="QuestionController as questCtrl">
-		<div>{{questCtrl.currentQuestion.questionId}} : {{questCtrl.currentQuestion.question}}</div>
+		<div>{{questCtrl.currentQuestion.id}} :
+			{{questCtrl.currentQuestion.text}}</div>
 
 		<div ng-show="questCtrl.currentQuestion.answers.length">
 			<ol>
 				<li ng-hide="questCtrl.currentQuestion.isMutliChoice"
 					ng-repeat="ans in questCtrl.currentQuestion.answers"><input
 					type="radio" name="questCtrl.currentQuestion.selectedAnswer"
-					value="{{ans}}"> <label>{{ans}}</label></li>
+					value="{{ans.id}}"> <label>{{ans.text}}</label></li>
 
 				<li ng-show="questCtrl.currentQuestion.isMutliChoice"
 					ng-repeat="ans in questCtrl.currentQuestion.answers"><input
 					type="checkbox" name="questCtrl.currentQuestion.selectedAnswer"
-					value="{{ans}}"> <label>{{ans}}</label></li>
+					value="{{ans.id}}"> <label>{{ans.text}}</label></li>
 
 			</ol>
 
@@ -40,10 +41,11 @@
 	</section>
 	<footer></footer>
 
-	<script
-		src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.0-rc.0/angular.min.js"></script>
-	<script type="text/javascript" src="js/quizApp.js"></script>
-	<script type="text/javascript" src="js/questionController.js"></script>
+	<script type="text/javascript"
+		src="/quizeria/resources/js/lib/angular.min.js"></script>
+	<script type="text/javascript" src="/quizeria/resources/js/quizApp.js"></script>
+	<script type="text/javascript"
+		src="/quizeria/resources/js/questionController.js"></script>
 
 
 </body>
