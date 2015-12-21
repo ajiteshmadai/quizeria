@@ -8,6 +8,7 @@ import java.util.List;
 
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ajiteshjmadai.quizeria.model.Answer;
@@ -24,18 +25,23 @@ public class QuizController {
 
 	private List<Question> questionList;
 
-	//private List<Answer> answerList;
+	// private List<Answer> answerList;
 
 	public QuizController() {
 		questionList = new ArrayList<Question>();
-		//answerList = new ArrayList<Answer>();
+		// answerList = new ArrayList<Answer>();
 		Answer a1 = new Answer(1, "Tokyo");
 		Answer a2 = new Answer(2, "Delhi");
 		Answer a3 = new Answer(3, "Sydney");
 		Answer a4 = new Answer(4, "London");
 		Answer a5 = new Answer(5, "Copenhagen");
-		
 
+		Question q0 = new Question();
+		q0.setId(0);
+		q0.setText("Placceholder question");
+		questionList.add(q0);
+
+		
 		Question q1 = new Question();
 		q1.setId(1);
 		q1.setText("What is the capital of Japan?");
@@ -64,16 +70,42 @@ public class QuizController {
 	}
 
 	@RequestMapping(value = "/next", method = RequestMethod.GET, produces = "application/json")
-	public Question nextQuestion() {
+	public Question nextQuestion(
+			@RequestParam(value = "currentQuestionId", required = false) Integer currentQuestionId) {
+
+		Integer nextQuestionId = decideNextQuestionId(currentQuestionId);
+		return questionList.get(nextQuestionId);
+
+	}
+
+	@RequestMapping(value = "/previous", method = RequestMethod.GET, produces = "application/json")
+	public Question previousQuestion(
+			@RequestParam(value = "currentQuestionId", required = false) Integer currentQuestionId) {
+
 		
-		return questionList.get(1);
+		Integer previousQuestionId = decidePreviousQuestionId(currentQuestionId);
+		return questionList.get(previousQuestionId);
+		
+
+	}
+
+	private Integer decideNextQuestionId(Integer currentQuestionId) {
+
+		if (currentQuestionId == null || (currentQuestionId == questionList.size())) {
+			return 1;
+		} else {
+			return ++currentQuestionId;
+		}
 
 	}
 	
-	@RequestMapping(value = "/previous", method = RequestMethod.GET, produces = "application/json")
-	public Question previousQuestion() {
-		
-		return questionList.get(0);
+	private Integer decidePreviousQuestionId(Integer currentQuestionId) {
+
+		if (currentQuestionId == null || (currentQuestionId == questionList.size())) {
+			return 1;
+		} else {
+			return --currentQuestionId;
+		}
 
 	}
 

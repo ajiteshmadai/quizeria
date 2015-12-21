@@ -3,20 +3,29 @@
  */
 
 quizApp.controller("QuestionController", [ '$http', function($http) {
-	var questionCount = 0;
-	// this.currentQuestion = questions[questionCount];
+
 	var that = this;
-	this.getNextQuestion = function() {
-		$http.get('/quizeria/question/next').success(function(data) {
+	this.getNextQuestion = function(currentQuestionId) {
+		$http.get('/quizeria/question/next', {
+			params : {
+				'currentQuestionId' : currentQuestionId
+			}
+		}).success(function(data) {
 			that.currentQuestion = data;
 		});
 
 	};
 
-	this.getPreviousQuestion = function() {
-		$http.get('/quizeria/question/previous').success(function(data) {
+	this.getPreviousQuestion = function(currentQuestionId) {
+		$http.get('/quizeria/question/previous', {
+			params : {
+				'currentQuestionId' : currentQuestionId
+			}
+		}).success(function(data) {
 			that.currentQuestion = data;
 		});
 	}
+
+	this.currentQuestion = this.getNextQuestion();
 
 } ]);
