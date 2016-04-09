@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Quizeria</title>
+    <!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
+</head>
+<body ng-app="QuizApp">
+<header>
+    <h1 class="jumbotron">Quizeria</h1>
+</header>
+
+<nav></nav>
+<section ng-controller="QuestionController as questCtrl" class="container-fuild">
+    <div class="row jumbotron">
+    	<span class="col-md-1">{{questCtrl.currentQuestion.id}} : </span>
+        <span class="col-md-11">{{questCtrl.currentQuestion.text}}</span>
+    </div>
+
+    <div ng-show="questCtrl.currentQuestion.answers.length">
+        <ol>
+            <li ng-hide="questCtrl.currentQuestion.isMutliChoice"
+                ng-repeat="ans in questCtrl.currentQuestion.answers"><input
+                    type="radio" name="questCtrl.currentQuestion.selectedAnswer"
+                    value="{{ans.id}}"> <label>{{ans.text}}</label></li>
+
+            <li ng-show="questCtrl.currentQuestion.isMutliChoice"
+                ng-repeat="ans in questCtrl.currentQuestion.answers"><input
+                    type="checkbox" name="questCtrl.currentQuestion.selectedAnswer"
+                    value="{{ans.id}}"> <label>{{ans.text}}</label></li>
+
+        </ol>
+
+
+    </div>
+
+    <div ng-hide="questCtrl.currentQuestion.answers.length">
+        <label>Your Answer : </label>
+        <textarea> </textarea>
+    </div>
+
+    <button type="button" class="btn btn-default" ng-click="questCtrl.getPreviousQuestion(questCtrl.currentQuestion.id)">Previous</button>
+    <button type="button" class="btn btn-primary" ng-click="questCtrl.getNextQuestion(questCtrl.currentQuestion.id)">Next</button>
+</section>
+<footer></footer>
+
+<script type="text/javascript"
+        src="/quizeria/resources/js/lib/angular.min.js" defer="defer"></script>
+<script type="text/javascript" src="/quizeria/resources/js/quizApp.js" defer="defer"></script>
+<script type="text/javascript"
+        src="/quizeria/resources/js/questionController.js" defer="defer"></script>
+
+
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous" defer="defer"></script>
+
+</body>
+</html>

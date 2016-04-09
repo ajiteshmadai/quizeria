@@ -9,16 +9,22 @@
  http://www.springframework.org/schema/mvc
  http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd">
 
-	<!-- Spring container will scan below mentioned packages  -->
+	<!-- Spring container will scan below mentioned packages -->
 	<context:component-scan base-package="com.ajiteshjmadai.quizeria.controller" />
 
-	<!-- Enabled spring annotations  -->
+	<!-- Enabled spring annotations -->
 	<mvc:annotation-driven />
-	
+
 	<!-- Mapping for resources -->
 	<mvc:resources mapping="/resources/**" location="/resources/" />
 
-	<!-- <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver"> 
-		<property name="prefix"> <value>/WEB-INF/views/</value> </property> <property 
-		name="suffix"> <value>.jsp</value> </property> </bean> -->
+	<bean
+		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="prefix">
+			<value>/resources/views/</value>
+		</property>
+		<property name="suffix">
+			<value>.html</value>
+		</property>
+	</bean>
 </beans>
