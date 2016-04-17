@@ -1,11 +1,3 @@
-// ==ClosureCompiler==
-// @output_file_name default.js
-// @compilation_level SIMPLE_OPTIMIZATIONS
-// ==/ClosureCompiler==
-
-/**
- *
- */
 
 quizApp.controller("QuestionController", ['$http', function($http) {
 
@@ -30,7 +22,7 @@ quizApp.controller("QuestionController", ['$http', function($http) {
 		}).success(function(data) {
 			that.currentQuestion = data;
 		});
-	}
+	};
 
 	this.currentQuestion = this.getNextQuestion();
 
